@@ -5,6 +5,9 @@ This project was created for an admin which had some issues handling his server.
 
 It's a website tool to make some things easier for admins. It works on a Jetty server running on port 8090 (8091 for https)
 
+![img1](https://i.imgur.com/ktpClno.png)
+![img1](https://i.imgur.com/xiYl6Th.png)
+
 
 __How does it works?__
 
