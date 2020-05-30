@@ -12,7 +12,7 @@ It's a Jetty server which will redirect the request to jsp files using jstl to d
 
 __How to access?__
 
-Open port 8090 (8091 for https) in your firewall. Open a web browser and navigate to http://<host>:8090
+Open port 8090 (8091 for https) in your firewall. Open a web browser and navigate to http://yourserverdomain.com:8090
 
 __It's asking for a username/password, what are the values?__
 
