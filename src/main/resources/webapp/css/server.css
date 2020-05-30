@@ -1,0 +1,66 @@
+html, body {
+    height: 100%
+}
+
+.center {
+    alignment: center;
+}
+
+.success {
+    background: mediumseagreen;
+    font-size: 15px;
+    display: none;
+}
+
+.container-fluid .row {
+    padding-top: 20px;
+}
+
+.container-fluid .card-columns .card {
+    padding-bottom: 10px;
+}
+
+#server-restart-success {
+    float: right;
+    display: none;
+    margin-top: 8px;
+}
+
+#server-restart-success-text {
+    float: right;
+    display: none;
+    margin-top: 5px;
+    font-weight: bold;
+    color: mediumseagreen;
+}
+
+#log-card {
+    margin-top: 10px;
+    display: none;
+    padding-bottom: 0 !important;
+    margin-bottom: -10px;
+    width: 100%;
+}
+
+#log-content,
+#chat-content {
+    padding: 0.75rem;
+    font-size: 12px;
+    font-family: "Courier New", Courier, monospace;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#ann {
+    margin-top: 10px;
+}
+
+#players-ban-card-body {
+    overflow-y: auto;
+    max-height: 400px;
+}

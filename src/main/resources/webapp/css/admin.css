@@ -1,0 +1,20 @@
+#donations-card {
+    overflow-y: auto;
+    max-height: 700px;
+}
+
+.status-in-progress {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.status-approved {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+th, tr {
+    text-align: center;
+}

@@ -1,0 +1,37 @@
+.no-players {
+    text-align: center;
+    font-weight: bold;
+    width: auto;
+}
+
+.container-fluid .row {
+    padding-top: 20px;
+}
+
+.pspan {
+    float: left;
+    font-size: 11px;
+    width: 22px;
+}
+
+.points {
+    margin-top: 2px;
+}
+
+@media screen and (max-width: 986px) {
+    .row > div {
+        margin-bottom: 10px;
+    }
+}
+
+.font-center{
+    text-align: center;
+}
+
+.player-name{
+    margin-left: 6px;
+}
+
+.progress > div{
+    color: black;
+}
