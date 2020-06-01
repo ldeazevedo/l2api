@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler;
 
-import com.l2timeus.model.BannedPlayer;
+import com.atiq.model.BannedPlayer;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.World;
 

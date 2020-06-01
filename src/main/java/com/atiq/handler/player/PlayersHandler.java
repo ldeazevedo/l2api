@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler.player;
 
-import com.l2timeus.model.APIPlayer;
+import com.atiq.model.APIPlayer;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.Player;
 

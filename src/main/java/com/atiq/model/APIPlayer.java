@@ -1,6 +1,9 @@
-package com.l2timeus.model;
+package com.atiq.model;
 
 import net.sf.l2j.gameserver.model.actor.Player;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class APIPlayer {
 
@@ -16,11 +19,14 @@ public class APIPlayer {
     private int karma;
     private int pk;
     private int pvp;
+    private int mapX, mapY;
+    private int x, y, z;
+    private List<APIItem> items;
 
     public APIPlayer() {
     }
 
-    public APIPlayer(int id, String name, int level, int cp, int hp, int mp, int karma, int pk, int pvp) {
+    public APIPlayer(int id, String name, int level, int cp, int hp, int mp, int karma, int pk, int pvp, int x, int y, int z, List<APIItem> items) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -30,6 +36,12 @@ public class APIPlayer {
         this.karma = karma;
         this.pk = pk;
         this.pvp = pvp;
+        this.mapX = getMapX(x);
+        this.mapY = getMapY(y);
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.items = items;
     }
 
     public APIPlayer(Player player) {
@@ -45,6 +57,20 @@ public class APIPlayer {
         this.karma = player.getKarma();
         this.pk = player.getPkKills();
         this.pvp = player.getPvpKills();
+        this.mapX = getMapX(player.getX());
+        this.mapY = getMapY(player.getY());
+        this.x = player.getX();
+        this.y = player.getY();
+        this.z = player.getZ();
+        this.items = player.getInventory().getItems().stream().map(ii -> new APIItem(ii.getItemId(), ii.getItemName(), ii.getCount(), ii.getLocation().name())).collect(Collectors.toList());
+    }
+
+    private int getMapX(int x) {
+        return 150 + (x + 107823) / 200;
+    }
+
+    private int getMapY(int y) {
+        return 2580 + (y - 255420) / 200;
     }
 
     public int getId() {
@@ -147,5 +173,53 @@ public class APIPlayer {
 
     public void setPvp(int pvp) {
         this.pvp = pvp;
+    }
+
+    public int getMapX() {
+        return mapX;
+    }
+
+    public void setMapX(int mapX) {
+        this.mapX = mapX;
+    }
+
+    public int getMapY() {
+        return mapY;
+    }
+
+    public void setMapY(int mapY) {
+        this.mapY = mapY;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public void setZ(int z) {
+        this.z = z;
+    }
+
+    public List<APIItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<APIItem> items) {
+        this.items = items;
     }
 }

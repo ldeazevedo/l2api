@@ -1,4 +1,4 @@
-package com.l2timeus.handlers;
+package com.atiq.handler;
 
 import net.sf.l2j.gameserver.model.World;
 

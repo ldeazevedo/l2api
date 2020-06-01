@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler;
 
-import com.l2timeus.model.Donation;
+import com.atiq.model.Donation;
 import net.sf.l2j.L2DatabaseFactory;
 
 import javax.servlet.ServletException;

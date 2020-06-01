@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler;
 
-import com.l2timeus.Util;
+import com.atiq.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

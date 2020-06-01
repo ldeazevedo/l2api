@@ -1,7 +1,7 @@
 window.onload = function () {
     var restartServerButton = document.getElementById("restart-server");
     restartServerButton.onclick = function (event) {
-        $.get("/server/restart?time=10", function (data, status) {
+        $.get("/server/restart?time=60", function (data, status) {
             if (status === "success") {
 
                 restartServerButton.style.display = "none";
@@ -31,6 +31,8 @@ window.onload = function () {
 
     var loginServerLogsButton = document.getElementById("login-server-logs");
     var gameServerLogsButton = document.getElementById("gameserver-server-logs");
+    var buttonMap = document.getElementById("button-map");
+    var searchPlayerButton = document.getElementById("find-player-button");
     var logCard = document.getElementById("log-card");
 
     document.getElementById("refresh-chat-log").onclick = function () {
@@ -45,6 +47,7 @@ window.onload = function () {
     var chatContent = document.getElementById("chat-content");
     gameServerLogsButton.onclick = showGSLogs;
     loginServerLogsButton.onclick = showLSLogs;
+    buttonMap.onclick = goToMap;
 
     function showLSLogs() {
         showHideLogCard();
@@ -85,6 +88,15 @@ window.onload = function () {
             logCard.style.display = "none";*/
     }
 
+    function goToMap() {
+        window.location.href = "/map";
+    }
+
+    searchPlayerButton.onclick = function () {
+        var playerName = document.getElementById("player-name-input");
+        window.location.href = "/playerinfo?playerName=" + playerName.value;
+    };
+
     var annButton = document.getElementById("ann-button");
     var annText = document.getElementById("ann-text");
     annButton.onclick = function () {
@@ -97,21 +109,6 @@ window.onload = function () {
             }
         });
     };
-
-    var playerName = document.getElementById("player-name-input").value;
-    var findPlayerButton = document.getElementById("find-player-button");
-    findPlayerButton.onclick = function () {
-        $.get("/playerinfo?playerName=" + playerName, function (data, status) {
-            if (status === "success") {
-                console.log(data);
-                showPlayerInfo(data);
-            }
-        });
-    };
-
-    function showPlayerInfo(playerData) {
-        console.log("showPlayerInfo()");
-    }
 
     loadChatLogs();
 };

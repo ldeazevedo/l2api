@@ -1,6 +1,9 @@
-package com.l2timeus;
+package com.atiq;
 
-import com.l2timeus.handlers.*;
+import com.atiq.handler.*;
+import com.atiq.handler.player.PlayerInfoHandler;
+import com.atiq.handler.player.PlayersHandler;
+import com.atiq.handler.player.PlayersTestHandler;
 import org.apache.tomcat.util.scan.StandardJarScanner;
 import org.eclipse.jetty.apache.jsp.JettyJasperInitializer;
 import org.eclipse.jetty.jsp.JettyJspServlet;
@@ -31,8 +34,9 @@ public class L2API {
     private static final String WEBROOT_INDEX = "/webapp/";
     private static final Logger LOG = Logger.getLogger(L2API.class.getName());
 
-    private static int port = 8090;
-    private static Server server;
+    private static int PORT = 8090;
+    private static int PORT_SSL = 8091;
+    private static Server SERVER = new Server();
 
     public static void main(String[] args) {
         init();
@@ -49,29 +53,26 @@ public class L2API {
     }
 
     private static void startServer() throws Exception {
-        server = new Server();
-
-        // Define ServerConnector
-        ServerConnector connector = new ServerConnector(server);
-        connector.setPort(port);
-        server.addConnector(connector);
+        ServerConnector connector = new ServerConnector(SERVER);
+        connector.setPort(PORT);
+        SERVER.addConnector(connector);
 
         HttpConfiguration https = new HttpConfiguration();
         https.addCustomizer(new SecureRequestCustomizer());
         https.setSecureScheme("https");
         SslContextFactory sslContextFactory = new SslContextFactory();
         sslContextFactory.setKeyStorePath(L2API.class.getResource("/keystore.ks").toExternalForm());
-        sslContextFactory.setKeyStorePassword("@qate3!");
-        sslContextFactory.setKeyManagerPassword("@qate3!");
-        ServerConnector sslConnector = new ServerConnector(server,
+        sslContextFactory.setKeyStorePassword("!!uide112!!");
+        sslContextFactory.setKeyManagerPassword("!!uide112!!");
+        ServerConnector sslConnector = new ServerConnector(SERVER,
                 new SslConnectionFactory(sslContextFactory, "http/1.1"),
                 new HttpConnectionFactory(https));
-        sslConnector.setPort(8091);
-        server.addConnector(sslConnector);
+        sslConnector.setPort(PORT_SSL);
+        SERVER.addConnector(sslConnector);
 
 
         Configuration.ClassList classlist = Configuration.ClassList
-                .setServerDefault(server);
+                .setServerDefault(SERVER);
         classlist.addBefore(
                 "org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
                 "org.eclipse.jetty.annotations.AnnotationConfiguration");
@@ -94,28 +95,32 @@ public class L2API {
         holderDefault.setInitParameter("resourceBase", baseUri.toASCIIString());
         holderDefault.setInitParameter("dirAllowed", "false");
         servletContextHandler.addServlet(holderDefault, "/");
-        server.setHandler(servletContextHandler);
+        SERVER.setHandler(servletContextHandler);
 
-        servletContextHandler.addServlet(new ServletHolder(new PlayersHandler()), "/players");
+        //SERVER
         servletContextHandler.addServlet(new ServletHolder(new ServerHandler()), "/server");
         servletContextHandler.addServlet(new ServletHolder(new ServerRestartHandler()), "/server/restart");
         servletContextHandler.addServlet(new ServletHolder(new LSLogsHandler()), "/server/lslogs");
         servletContextHandler.addServlet(new ServletHolder(new GSLogsHandler()), "/server/gslogs");
         servletContextHandler.addServlet(new ServletHolder(new AnnounceHandler()), "/server/announce");
         servletContextHandler.addServlet(new ServletHolder(new ChatHandler()), "/server/chatlogs");
-        servletContextHandler.addServlet(new ServletHolder(new AdminHandler()), "/admin");
-        servletContextHandler.addServlet(new ServletHolder(new PlayerDataHandler()), "/playerinfo");
-        servletContextHandler.addServlet(new ServletHolder(new RegisterHandler()), "/register");
 
-        //TODO: TESTS
+        //MISC
+        servletContextHandler.addServlet(new ServletHolder(new AdminHandler()), "/admin");
+        servletContextHandler.addServlet(new ServletHolder(new RegisterHandler()), "/register");
+        servletContextHandler.addServlet(new ServletHolder(new MapHandler()), "/map");
+
+        //PLAYER
+        servletContextHandler.addServlet(new ServletHolder(new PlayersHandler()), "/players");
+        servletContextHandler.addServlet(new ServletHolder(new PlayerInfoHandler()), "/playerinfo");
         servletContextHandler.addServlet(new ServletHolder(new PlayersTestHandler()), "/playerstest");
 
         System.out.println("Registered APIs:");
         Arrays.stream(servletContextHandler.getServletHandler().getServletMappings()).forEach(s -> System.out.println(s.getPathSpecs()[0]));
 
-        server.start();
-        server.join();
-        server.dump();
+        SERVER.start();
+        SERVER.join();
+        SERVER.dump();
     }
 
     private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {
@@ -165,7 +170,7 @@ public class L2API {
         JettyJasperInitializer sci;
         ServletContextHandler context;
 
-        public JspStarter(ServletContextHandler context) {
+        JspStarter(ServletContextHandler context) {
             this.sci = new JettyJasperInitializer();
             this.context = context;
             StandardJarScanner standardJarScanner = new StandardJarScanner();
@@ -188,13 +193,11 @@ public class L2API {
         }
     }
 
-    private static final SecurityHandler getBasicAuth() {
+    private static SecurityHandler getBasicAuth() {
         HashLoginService loginService = new HashLoginService();
         loginService.setName("Private!");
-
         UserStore userStore = new UserStore();
         userStore.addUser("admin", new Password("@qate3!"), new String[]{"admin"});
-
         loginService.setUserStore(userStore);
 
         Constraint constraint = new Constraint();
@@ -204,12 +207,26 @@ public class L2API {
 
         ConstraintMapping cm = new ConstraintMapping();
         cm.setConstraint(constraint);
-        cm.setPathSpec("/*");
+        cm.setPathSpec("/server/*");
+
+        ConstraintMapping cm2 = new ConstraintMapping();
+        cm2.setConstraint(constraint);
+        cm2.setPathSpec("/players");
+
+        ConstraintMapping cm3 = new ConstraintMapping();
+        cm3.setConstraint(constraint);
+        cm3.setPathSpec("/admin/*");
+
+        Constraint noPassConstraint = new Constraint();
+        noPassConstraint.setAuthenticate(false);
+        ConstraintMapping cm4 = new ConstraintMapping();
+        cm4.setConstraint(noPassConstraint);
+        cm4.setPathSpec("/map");
 
         ConstraintSecurityHandler csh = new ConstraintSecurityHandler();
         csh.setAuthenticator(new BasicAuthenticator());
         csh.setRealmName("myrealm");
-        csh.addConstraintMapping(cm);
+        csh.setConstraintMappings(new ConstraintMapping[]{cm, cm2, cm3, cm4});
         csh.setLoginService(loginService);
 
         return csh;

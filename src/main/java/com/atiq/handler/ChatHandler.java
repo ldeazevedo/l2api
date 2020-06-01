@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler;
 
-import com.l2timeus.Util;
+import com.atiq.Util;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ public class ChatHandler extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
-        String log = Util.readFile("./log/chat/chat_0.txt");
+        String log = Util.readFile("./log/chat/chat.txt");
         String[] logParsedString = log.split("<br>");
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -36,7 +36,7 @@ public class ChatHandler extends HttpServlet {
             }
 
             int startingIndex = chatLine.indexOf("]", 20) + 1;
-            String chatText = chatLine.substring(startingIndex, chatLine.length());
+            String chatText = chatLine.substring(startingIndex);
 
             if (chatText.contains("Type") && chatText.contains("Color") && chatText.contains("Underline"))
                 continue;

@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/css/server.css"/>">
-    <script src="<c:url value="/js/server.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="css/server.css"/>">
+    <script src="<c:url value="js/server.js"/>"></script>
     <title>Server Management</title>
 </head>
 
@@ -20,13 +20,27 @@
                     <div class="card">
                         <div class="card-header">Server Restart</div>
                         <div class="card-body">
-                            <p class="card-text">Reinicia el servidor haciendo click en Restart!</p>
+                            <p class="card-text">Restart the server click on Restart Button. Restart countdown is 60
+                                seconds</p>
                             <div class="card-text">
                                 <button type="button" class="btn btn-primary" id="restart-server" style="float: left">
                                     Restart!
                                 </button>
                                 <progress value="0" max="10" id="server-restart-success"></progress>
                                 <span id="server-restart-success-text">Servidor reiniciado!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="padding-top: 20px !important;">
+                    <div class="card">
+                        <div class="card-header">Interactive map</div>
+                        <div class="card-body">
+                            <p class="card-text">You can see where the online players are in real time!</p>
+                            <div class="card-text">
+                                <button type="button" class="btn btn-primary" id="button-map" style="float: left">
+                                    Go to the map!
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -42,7 +56,7 @@
                                            placeholder="Announcement" aria-label="Announcement"
                                            aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="ann-button">Enviar!</button>
+                                        <button class="btn btn-primary" type="button" id="ann-button">Send!</button>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +106,7 @@
                 </div>
                 <div class="col-lg-12" style="padding-top: 20px !important;">
                     <div class="card">
-                        <div class="card-header">Character's Ban</div>
+                        <div class="card-header">Character Bans</div>
                         <div class="card-body" id="players-ban-card-body">
                             <div class="card-block">
                                 <table class="table table-sm table-striped table-bordered">
@@ -133,7 +147,8 @@
                                            placeholder="Player name" aria-label="Player name"
                                            aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="find-player-button">Buscar</button>
+                                        <button class="btn btn-primary" type="button" id="find-player-button">Search
+                                        </button>
                                     </div>
                                 </div>
                             </div>

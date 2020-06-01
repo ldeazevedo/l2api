@@ -1,6 +1,6 @@
-package com.l2timeus.handlers;
+package com.atiq.handler.player;
 
-import com.l2timeus.model.APIPlayer;
+import com.atiq.model.APIPlayer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +16,8 @@ public class PlayersTestHandler extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        APIPlayer APIPlayer1 = new APIPlayer(1, "Emmanuel", 55, 4320, 5500, 1200, 0, 5, 10);
-        APIPlayer APIPlayer2 = new APIPlayer(2, "Sabrina", 60, 2000, 3500, 2800, 400, 20, 12);
+        APIPlayer APIPlayer1 = new APIPlayer(1, "Emmanuel", 55, 4320, 5500, 1200, 0, 5, 10, 80364, 147100, -2450, null);
+        APIPlayer APIPlayer2 = new APIPlayer(2, "Sabrina", 60, 2000, 3500, 2800, 400, 20, 12, 80364, 147100, -2450, null);
 
         request.setAttribute("players", Arrays.asList(APIPlayer1, APIPlayer2));
 

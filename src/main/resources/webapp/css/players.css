@@ -24,14 +24,18 @@
     }
 }
 
-.font-center{
+.font-center {
     text-align: center;
 }
 
-.player-name{
+.player-name {
     margin-left: 6px;
 }
 
-.progress > div{
+.progress > div {
     color: black;
+}
+
+#player-info-card-body {
+    height: 500px;
 }

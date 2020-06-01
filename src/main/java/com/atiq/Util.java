@@ -1,12 +1,11 @@
-package com.l2timeus;
+package com.atiq;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class Util {
 
-    public static String readFile(String fileName) throws IOException {
+    public static String readFile(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();

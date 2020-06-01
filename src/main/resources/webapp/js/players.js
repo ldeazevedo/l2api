@@ -15,4 +15,9 @@ window.onload = function () {
             });
         }
     }
+
+    var findPlayerButton = document.getElementById("find-player-button");
+    findPlayerButton.onclick = function () {
+        console.log("findPlayer");
+    };
 };

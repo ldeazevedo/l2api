@@ -1,6 +1,4 @@
-package com.l2timeus.model;
-
-import java.util.Date;
+package com.atiq.model;
 
 public class Donation {
 

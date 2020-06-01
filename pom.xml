@@ -8,7 +8,7 @@
     <artifactId>l2api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <jetty.version>[9.4.17.v20190418,)</jetty.version>
+        <jetty.version>9.4.17.v20190418</jetty.version>
     </properties>
 
     <dependencies>
@@ -73,7 +73,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.l2timeus.L2API</mainClass>
+                            <mainClass>com.atiq.L2API</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

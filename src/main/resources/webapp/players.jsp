@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="<c:url value="/js/players.js"/>"></script>
+    <script src="<c:url value="js/players.js"/>"></script>
     <title>Online Players</title>
 </head>
 
@@ -44,9 +44,8 @@
                                             <div class="progress-bar bg-danger" role="progressbar"
                                                  style="width: ${(player.hp * 100) / player.maxHP}%;"
                                                  aria-valuenow="${(player.hp * 100) / player.maxHP}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="100"><c:out value="${player.hp}"/>/<c:out
-                                                    value="${player.maxHP}"/>
+                                                 aria-valuemin="0" aria-valuemax="100"><c:out
+                                                    value="${player.hp}"/>/<c:out value="${player.maxHP}"/>
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-package com.l2timeus.model;
+package com.atiq.model;
 
 public class BannedPlayer {
     private String charName;
