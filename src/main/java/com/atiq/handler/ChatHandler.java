@@ -14,7 +14,7 @@ public class ChatHandler extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
-        String log = Util.readFile("./log/chat/chat.txt");
+        String log = Util.readFile("./log/chat/chat_0.txt");
         String[] logParsedString = log.split("<br>");
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -24,18 +24,12 @@ public class ChatHandler extends HttpServlet {
             String playerName = chatLineParsed[1].split("\\[")[1].trim();
             String type = chatLineParsed[1].split("\\[")[0].trim();
             String color;
-            switch (type) {
-                case "SHOUT":
-                    color = "orange";
-                    break;
-                case "TRADE":
-                    color = "violet";
-                    break;
-                default:
-                    continue;
-            }
 
-            int startingIndex = chatLine.indexOf("]", 20) + 1;
+            if (!type.equalsIgnoreCase("SHOUT") || !type.equalsIgnoreCase("TRADE"))
+                continue;
+
+            color = type.equalsIgnoreCase("SHOUT") ? "orange" : "violet";
+            int startingIndex = chatLine.indexOf(']', 20) + 1;
             String chatText = chatLine.substring(startingIndex);
 
             if (chatText.contains("Type") && chatText.contains("Color") && chatText.contains("Underline"))
