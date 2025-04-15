@@ -14,8 +14,7 @@ public class Util {
             String line = br.readLine();
 
             while (line != null) {
-                sb.append(line);
-                sb.append("<br>");
+                sb.append(line).append("<br>");
                 line = br.readLine();
             }
             return sb.toString();

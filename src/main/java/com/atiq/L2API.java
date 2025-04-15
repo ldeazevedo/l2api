@@ -25,17 +25,20 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class L2API {
 
     private static final String WEBROOT_INDEX = "/webapp/";
-    private static final Logger LOG = Logger.getLogger(L2API.class.getName());
+    private static final Logger log = Logger.getLogger(L2API.class.getName());
 
     private final static int PORT = 8090;
     private final static int PORT_SSL = 8091;
     private final static Server SERVER = new Server();
+
+    private L2API() {
+        throw new IllegalStateException("Can't instantiate this class");
+    }
 
     public static void main(String[] args) {
         init();
@@ -47,11 +50,12 @@ public class L2API {
         try {
             startServer();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.throwing("L2API", "init", ex);
         }
     }
 
     private static void startServer() throws Exception {
+        log.info("Starting L2API...");
         ServerConnector connector = new ServerConnector(SERVER);
         connector.setPort(PORT);
         SERVER.addConnector(connector);
@@ -110,12 +114,11 @@ public class L2API {
         servletContextHandler.addServlet(new ServletHolder(new PlayerInfoHandler()), "/playerinfo");
         servletContextHandler.addServlet(new ServletHolder(new PlayersTestHandler()), "/playerstest");
 
-        System.out.println("Registered APIs:");
-        Arrays.stream(servletContextHandler.getServletHandler().getServletMappings()).forEach(s -> System.out.println(s.getPathSpecs()[0]));
-
         SERVER.start();
         SERVER.join();
         SERVER.dump();
+
+        log.info("L2API successfully started");
     }
 
     private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {

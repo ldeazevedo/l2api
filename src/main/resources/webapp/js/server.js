@@ -1,17 +1,17 @@
 window.onload = function () {
-    var restartServerButton = document.getElementById("restart-server");
+    let restartServerButton = document.getElementById("restart-server");
     restartServerButton.onclick = function (event) {
         $.get("/server/restart?time=60", function (data, status) {
             if (status === "success") {
 
                 restartServerButton.style.display = "none";
 
-                var serverRestartSuccess = document.getElementById("server-restart-success");
-                var serverRestartSuccessText = document.getElementById("server-restart-success-text");
+                let serverRestartSuccess = document.getElementById("server-restart-success");
+                let serverRestartSuccessText = document.getElementById("server-restart-success-text");
                 serverRestartSuccess.style.display = "block";
 
-                var timeleft = 10;
-                var downloadTimer = setInterval(function () {
+                let timeleft = 10;
+                let downloadTimer = setInterval(function () {
                     serverRestartSuccess.value = 10 - --timeleft;
                     if (timeleft <= 0)
                         clearInterval(downloadTimer);
@@ -29,11 +29,11 @@ window.onload = function () {
         });
     };
 
-    var loginServerLogsButton = document.getElementById("login-server-logs");
-    var gameServerLogsButton = document.getElementById("gameserver-server-logs");
-    var buttonMap = document.getElementById("button-map");
-    var searchPlayerButton = document.getElementById("find-player-button");
-    var logCard = document.getElementById("log-card");
+    let loginServerLogsButton = document.getElementById("login-server-logs");
+    let gameServerLogsButton = document.getElementById("gameserver-server-logs");
+    let buttonMap = document.getElementById("button-map");
+    let searchPlayerButton = document.getElementById("find-player-button");
+    let logCard = document.getElementById("log-card");
 
     document.getElementById("refresh-chat-log").onclick = function () {
         loadChatLogs();
@@ -43,8 +43,8 @@ window.onload = function () {
         logCard.style.display = "none";
     };
 
-    var logContent = document.getElementById("log-content");
-    var chatContent = document.getElementById("chat-content");
+    let logContent = document.getElementById("log-content");
+    let chatContent = document.getElementById("chat-content");
     gameServerLogsButton.onclick = showGSLogs;
     loginServerLogsButton.onclick = showLSLogs;
     buttonMap.onclick = goToMap;
@@ -93,14 +93,14 @@ window.onload = function () {
     }
 
     searchPlayerButton.onclick = function () {
-        var playerName = document.getElementById("player-name-input");
+        let playerName = document.getElementById("player-name-input");
         window.location.href = "/playerinfo?playerName=" + playerName.value;
     };
 
-    var annButton = document.getElementById("ann-button");
-    var annText = document.getElementById("ann-text");
+    let annButton = document.getElementById("ann-button");
+    let annText = document.getElementById("ann-text");
     annButton.onclick = function () {
-        var annTextValue = annText.value;
+        let annTextValue = annText.value;
         if (annTextValue === "")
             return;
         $.get("/server/announce?ann=" + annTextValue, function (data, status) {

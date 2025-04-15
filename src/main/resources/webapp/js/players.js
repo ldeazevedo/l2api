@@ -1,23 +1,23 @@
 window.onload = function () {
-    var kickButtons = document.getElementsByClassName("kick_button");
-    for (var i = 0; i < kickButtons.length; i++) {
+    let kickButtons = document.getElementsByClassName("kick_button");
+    for (let i = 0; i < kickButtons.length; i++) {
         kickButtons[i].onclick = function () {
-            var objId = event.target.id;
+            let objId = event.target.id;
             console.log("KickButtonID: " + objId);
-            var playerName = objId.substring(objId.lastIndexOf("_") + 1, objId.length);
+            let playerName = objId.substring(objId.lastIndexOf("_") + 1, objId.length);
             console.log("PlayerName: " + playerName);
 
-            var url = "/players?player_name=" + playerName + "&action=KICK";
-            $.post(url, function (data, status) {
+            let url = "/players?player_name=" + playerName + "&action=KICK";
+            $.post(url, function (data) {
                 if (data.status === "OK") {
-                    window.location.reload(true);
+                    window.location.reload();
                 }
             });
         }
     }
 
-    var findPlayerButton = document.getElementById("find-player-button");
-    findPlayerButton.onclick = function () {
+    document.getElementById("find-player-button").onclick = function () {
+        //TODO: add functionality here
         console.log("findPlayer");
     };
 };
