@@ -1,13 +1,13 @@
 package com.atiq.handler;
 
 import com.atiq.model.BannedPlayer;
-import net.sf.l2j.L2DatabaseFactory;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.l2j.commons.pool.ConnectionPool;
 import net.sf.l2j.gameserver.model.World;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +39,7 @@ public class ServerHandler extends HttpServlet {
 
     private List<BannedPlayer> getBannedCharacters() {
         List<BannedPlayer> bannedPlayerList = new ArrayList<>();
-        try (Connection conn = L2DatabaseFactory.getInstance().getConnection()) {
+        try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(BANNED_CHARACTERS_QUERY);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

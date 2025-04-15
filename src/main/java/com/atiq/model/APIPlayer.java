@@ -47,13 +47,13 @@ public class APIPlayer {
     public APIPlayer(Player player) {
         this.id = player.getObjectId();
         this.name = player.getName();
-        this.level = player.getLevel();
-        this.cp = (int) player.getCurrentCp();
-        this.hp = (int) player.getCurrentHp();
-        this.mp = (int) player.getCurrentMp();
-        this.maxCP = player.getMaxCp();
-        this.maxHP = player.getMaxHp();
-        this.maxMP = player.getMaxMp();
+        this.level = player.getStatus().getLevel();
+        this.cp = (int) player.getStatus().getCp();
+        this.hp = (int) player.getStatus().getHp();
+        this.mp = (int) player.getStatus().getMp();
+        this.maxCP = player.getStatus().getMaxCp();
+        this.maxHP = player.getStatus().getMaxHp();
+        this.maxMP = player.getStatus().getMaxMp();
         this.karma = player.getKarma();
         this.pk = player.getPkKills();
         this.pvp = player.getPvpKills();

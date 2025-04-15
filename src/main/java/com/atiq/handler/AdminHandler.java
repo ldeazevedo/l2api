@@ -1,12 +1,12 @@
 package com.atiq.handler;
 
 import com.atiq.model.Donation;
-import net.sf.l2j.L2DatabaseFactory;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.l2j.commons.pool.ConnectionPool;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +38,7 @@ public class AdminHandler extends HttpServlet {
 
     public List<Donation> getDonations() {
         List<Donation> donations = new ArrayList<>();
-        try (Connection conn = L2DatabaseFactory.getInstance().getConnection()) {
+        try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(GET_ALL_DONATIONS_QUERY);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -17,7 +17,6 @@ import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.webapp.Configuration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,9 +33,9 @@ public class L2API {
     private static final String WEBROOT_INDEX = "/webapp/";
     private static final Logger LOG = Logger.getLogger(L2API.class.getName());
 
-    private static int PORT = 8090;
-    private static int PORT_SSL = 8091;
-    private static Server SERVER = new Server();
+    private final static int PORT = 8090;
+    private final static int PORT_SSL = 8091;
+    private final static Server SERVER = new Server();
 
     public static void main(String[] args) {
         init();
@@ -60,10 +59,8 @@ public class L2API {
         HttpConfiguration https = new HttpConfiguration();
         https.addCustomizer(new SecureRequestCustomizer());
         https.setSecureScheme("https");
-        SslContextFactory sslContextFactory = new SslContextFactory();
-        sslContextFactory.setKeyStorePath(L2API.class.getResource("/keystore.ks").toExternalForm());
-        sslContextFactory.setKeyStorePassword("!!uide112!!");
-        sslContextFactory.setKeyManagerPassword("!!uide112!!");
+        SslContextFactory.Server sslContextFactory = new SslContextFactory.Server();
+        sslContextFactory.setTrustAll(true);
         ServerConnector sslConnector = new ServerConnector(SERVER,
                 new SslConnectionFactory(sslContextFactory, "http/1.1"),
                 new HttpConnectionFactory(https));
@@ -71,14 +68,12 @@ public class L2API {
         SERVER.addConnector(sslConnector);
 
 
-        Configuration.ClassList classlist = Configuration.ClassList
-                .setServerDefault(SERVER);
-        classlist.addBefore(
-                "org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
-                "org.eclipse.jetty.annotations.AnnotationConfiguration");
+        //Configuration.ClassList classlist = Configuration.ClassList.setServerDefault(SERVER);
+        //classlist.addBefore(
+        //        "org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
+        //        "org.eclipse.jetty.annotations.AnnotationConfiguration");
 
         URI baseUri = getWebRootResourceUri();
-        LOG.info("Base URI: " + baseUri);
 
         // Create Servlet context
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);

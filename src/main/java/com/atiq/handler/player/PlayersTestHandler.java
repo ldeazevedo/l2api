@@ -1,13 +1,13 @@
 package com.atiq.handler.player;
 
 import com.atiq.model.APIPlayer;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Collections;
 
 public class PlayersTestHandler extends HttpServlet {
 
@@ -17,9 +17,8 @@ public class PlayersTestHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         APIPlayer APIPlayer1 = new APIPlayer(1, "Emmanuel", 55, 4320, 5500, 1200, 0, 5, 10, 80364, 147100, -2450, null);
-        APIPlayer APIPlayer2 = new APIPlayer(2, "Sabrina", 60, 2000, 3500, 2800, 400, 20, 12, 80364, 147100, -2450, null);
 
-        request.setAttribute("players", Arrays.asList(APIPlayer1, APIPlayer2));
+        request.setAttribute("players", Collections.singletonList(APIPlayer1));
 
         try {
             request.getRequestDispatcher("/players.jsp").forward(request, response);

@@ -1,12 +1,12 @@
 package com.atiq.handler;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import net.sf.l2j.commons.crypt.BCrypt;
 import net.sf.l2j.commons.lang.StringUtil;
 import net.sf.l2j.loginserver.data.sql.AccountTable;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RegisterHandler extends HttpServlet {
@@ -22,7 +22,7 @@ public class RegisterHandler extends HttpServlet {
             return;
         }
 
-        AccountTable.getInstance().createAccount(username, BCrypt.hashpw(password, BCrypt.gensalt()), System.currentTimeMillis());
+        AccountTable.getInstance().createAccount(username, BCrypt.hashPw(password, BCrypt.generateSalt()), System.currentTimeMillis());
 
         resp.setStatus(200);
     }
