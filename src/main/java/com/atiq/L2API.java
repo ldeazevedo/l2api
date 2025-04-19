@@ -2,6 +2,7 @@ package com.atiq;
 
 import com.atiq.handler.*;
 import com.atiq.handler.player.PlayerInfoHandler;
+import com.atiq.handler.player.PlayerInfoHandlerTest;
 import com.atiq.handler.player.PlayersHandler;
 import com.atiq.handler.player.PlayersTestHandler;
 import org.apache.tomcat.util.scan.StandardJarScanner;
@@ -112,13 +113,16 @@ public class L2API {
         //PLAYER
         servletContextHandler.addServlet(new ServletHolder(new PlayersHandler()), "/players");
         servletContextHandler.addServlet(new ServletHolder(new PlayerInfoHandler()), "/playerinfo");
+
+        //TEST
+        servletContextHandler.addServlet(new ServletHolder(new PlayerInfoHandlerTest()), "/playerinfotest");
         servletContextHandler.addServlet(new ServletHolder(new PlayersTestHandler()), "/playerstest");
+
+        log.info("L2API successfully started");
 
         SERVER.start();
         SERVER.join();
         SERVER.dump();
-
-        log.info("L2API successfully started");
     }
 
     private static URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {

@@ -1,10 +1,16 @@
 package com.atiq.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.sf.l2j.gameserver.model.actor.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class APIPlayer {
 
     private int id;
@@ -22,9 +28,6 @@ public class APIPlayer {
     private int mapX, mapY;
     private int x, y, z;
     private List<APIItem> items;
-
-    public APIPlayer() {
-    }
 
     public APIPlayer(int id, String name, int level, int cp, int hp, int mp, int karma, int pk, int pvp, int x, int y, int z, List<APIItem> items) {
         this.id = id;
@@ -71,155 +74,5 @@ public class APIPlayer {
 
     private int getMapY(int y) {
         return 2580 + (y - 255420) / 200;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getCp() {
-        return cp;
-    }
-
-    public APIPlayer setCp(int cp) {
-        this.cp = cp;
-        return this;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public APIPlayer setHp(int hp) {
-        this.hp = hp;
-        return this;
-    }
-
-    public int getMp() {
-        return mp;
-    }
-
-    public APIPlayer setMp(int mp) {
-        this.mp = mp;
-        return this;
-    }
-
-    public int getMaxCP() {
-        return maxCP;
-    }
-
-    public APIPlayer setMaxCP(int maxCP) {
-        this.maxCP = maxCP;
-        return this;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public APIPlayer setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
-        return this;
-    }
-
-    public int getMaxMP() {
-        return maxMP;
-    }
-
-    public APIPlayer setMaxMP(int maxMP) {
-        this.maxMP = maxMP;
-        return this;
-    }
-
-    public int getKarma() {
-        return karma;
-    }
-
-    public void setKarma(int karma) {
-        this.karma = karma;
-    }
-
-    public int getPk() {
-        return pk;
-    }
-
-    public void setPk(int pk) {
-        this.pk = pk;
-    }
-
-    public int getPvp() {
-        return pvp;
-    }
-
-    public void setPvp(int pvp) {
-        this.pvp = pvp;
-    }
-
-    public int getMapX() {
-        return mapX;
-    }
-
-    public void setMapX(int mapX) {
-        this.mapX = mapX;
-    }
-
-    public int getMapY() {
-        return mapY;
-    }
-
-    public void setMapY(int mapY) {
-        this.mapY = mapY;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getZ() {
-        return z;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
-    }
-
-    public List<APIItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<APIItem> items) {
-        this.items = items;
     }
 }
